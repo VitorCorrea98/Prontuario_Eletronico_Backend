@@ -1,0 +1,44 @@
+# Node.js dependencies
+/node_modules/
+
+# TypeScript build output
+/dist/
+/build/
+/lib/
+
+/.env
+
+# Docker files
+.docker/
+
+
+# Biome
+.biome/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# npm package lock files (if you are using yarn, include yarn.lock instead)
+package-lock.json
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Test coverage
+/coverage/
+
+# Prisma
+.prisma/
+
+# Other environment-related or sensitive files
+.env.local
+.env.production
+.env.test

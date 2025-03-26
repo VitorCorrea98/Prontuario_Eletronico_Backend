@@ -1,0 +1,39 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app # Garante que os arquivos locais sejam refletidos no container
+      - /app/node_modules # Evita sobrescrever os módulos do container
+    env_file:
+      - .env
+    depends_on:
+      - database
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"    # Porta para conexões entre os serviços
+      - "15672:15672"  # Interface web do RabbitMQ
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+  database:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: viju
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: prontuario
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+
+
+volumes:
+  mysql_data:
