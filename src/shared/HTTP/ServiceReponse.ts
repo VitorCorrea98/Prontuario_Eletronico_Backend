@@ -8,6 +8,7 @@ export const HTTPBadStatus = {
 	BAD: 400,
 	NOT_FOUND: 404,
 	NOT_AUTHORIZED: 401,
+	INVALID_INPUT: 422,
 } as const;
 
 export const HTTPStatusMap = {
@@ -33,3 +34,7 @@ export type ServiceErrorResponse = {
 };
 
 export type ServiceResponse = ServiceSuccessResponse | ServiceErrorResponse;
+
+export type ServiceFunction<TRequest, TResponse extends ServiceResponse> = (
+	data: TRequest,
+) => Promise<TResponse>;

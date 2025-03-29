@@ -1,7 +1,6 @@
 import type { User } from "../../core/User/Entities/User_Entity";
 import type { IUserRepository } from "../../core/User/Repositories/User_Repository";
 import { getPrismaClient } from "../Database/PrismaClient";
-import { publishMessage } from "../Messaging/publisher";
 
 const prisma = getPrismaClient();
 

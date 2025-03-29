@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import type {
 	ServiceErrorResponse,
@@ -6,14 +7,13 @@ import type {
 } from "../../../shared/HTTP/ServiceReponse";
 import { hashPassword } from "../../../shared/Security/hash";
 import type { User } from "../Entities/User_Entity";
-import type { IUserRepository } from "../Repositories/User_Repository";
+import type { IUserCreateRepository } from "../Repositories/User_Repository";
 
 export const createUser =
-	(userRepository: IUserRepository<User>) =>
-	async (
-		user: Omit<User, "id" | "createdAt" | "updatedAt">,
-	): Promise<ServiceResponse> => {
+	(userRepository: IUserCreateRepository<User>) =>
+	async (request: Request): Promise<ServiceResponse> => {
 		try {
+			const user = request.body;
 			// 🔐 Criptografa a senha
 			const hashedPassword = await hashPassword(user.password);
 

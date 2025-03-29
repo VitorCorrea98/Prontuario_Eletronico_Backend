@@ -1,8 +1,9 @@
-import type { IUserRepository } from "../Repositories/User_Repository";
+import type { User } from "../Entities/User_Entity";
+import type { IUserReadRepository } from "../Repositories/User_Repository";
 
 export const findUserByEmail =
-	<T>(userRepository: IUserRepository<T>) =>
-	async (email: string): Promise<T | null> => {
+	(userRepository: IUserReadRepository<User>) =>
+	async (email: string): Promise<User | null> => {
 		const userFound = await userRepository.findByEmail(email);
 
 		if (!userFound) return null;

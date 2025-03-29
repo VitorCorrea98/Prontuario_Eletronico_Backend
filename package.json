@@ -7,12 +7,16 @@
     "start:dev": "nodemon src/app.ts",
     "check": "npx biome check",
     "check:fix": "npx biome check --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "seed": "ts-node prisma/seed.ts"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run check:fix"
     }
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
