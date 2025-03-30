@@ -6,7 +6,6 @@ export const validateChoosenFieldOnObject = <T>(
 	object: T,
 	field: keyof T,
 ): ServiceResponse | null => {
-	console.log({ field: object[field] });
 	if (
 		!object[field] ||
 		(typeof object[field] === "string" && object[field].trim().length === 0)

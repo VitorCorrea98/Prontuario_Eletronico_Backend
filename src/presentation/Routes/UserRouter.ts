@@ -25,8 +25,8 @@ userRouter.post(
 	validateRequestObject(["email", "password"]),
 	validateUserExists(PrismaUserRepository),
 	genericController<LoginInput, ServiceResponse, LoginRequest>(
-		async (input) => await UserService.login(input),
-		(req) => {
+		UserService.login,
+		(req: LoginRequest) => {
 			if (!req.user) {
 				throw new Error("User is undefined");
 			}
