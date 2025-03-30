@@ -1,4 +1,3 @@
-// genericController.ts
 import type { Request, Response } from "express";
 import {
 	type ServiceFunction,
@@ -7,12 +6,18 @@ import {
 } from "../../shared/HTTP/ServiceReponse";
 
 export const genericController =
-	<TRequest, TResponse extends ServiceResponse>(
-		serviceFunction: ServiceFunction<TRequest, TResponse>,
+	<
+		TInput,
+		TResponse extends ServiceResponse,
+		TRequest extends Request = Request,
+	>(
+		serviceFunction: ServiceFunction<TInput, TResponse>,
+		selector: (req: TRequest) => TInput = (req) => req.body as TInput,
 	) =>
-	async (req: Request, res: Response): Promise<void> => {
+	async (req: TRequest, res: Response): Promise<void> => {
 		try {
-			const serviceResponse = await serviceFunction(req as TRequest);
+			const inputData = selector(req);
+			const serviceResponse = await serviceFunction(inputData);
 
 			const httpStatus = getHTTPStatus(serviceResponse.status);
 
@@ -20,8 +25,8 @@ export const genericController =
 		} catch (error) {
 			res.status(500).json({
 				status: "ERROR",
-				message: "Internal server error.",
-				error: (error as Error).message,
+				message: "Internal server error",
+				error: error instanceof Error ? error.message : "Unknown error",
 			});
 		}
 	};

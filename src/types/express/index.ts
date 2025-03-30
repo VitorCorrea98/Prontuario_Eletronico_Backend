@@ -1,6 +1,5 @@
 import type { Request } from "express";
-import type { User } from "../../core/User/Entities/User_Entity";
 
-export interface CustomRequest extends Request {
-	user?: User;
-}
+export type DataSelector<TInput, TRequest extends Request = Request> = (
+	req: TRequest,
+) => TInput;

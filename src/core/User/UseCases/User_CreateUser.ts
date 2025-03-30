@@ -9,11 +9,13 @@ import { hashPassword } from "../../../shared/Security/hash";
 import type { User } from "../Entities/User_Entity";
 import type { IUserCreateRepository } from "../Repositories/User_Repository";
 
+export type CreateUserInput = Omit<User, "id" | "createdAt" | "updatedAt">;
+
 export const createUser =
 	(userRepository: IUserCreateRepository<User>) =>
-	async (request: Request): Promise<ServiceResponse> => {
+	async (request: CreateUserInput): Promise<ServiceResponse> => {
 		try {
-			const user = request.body;
+			const user = request;
 			// 🔐 Criptografa a senha
 			const hashedPassword = await hashPassword(user.password);
 

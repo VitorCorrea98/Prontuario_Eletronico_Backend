@@ -35,6 +35,6 @@ export type ServiceErrorResponse = {
 
 export type ServiceResponse = ServiceSuccessResponse | ServiceErrorResponse;
 
-export type ServiceFunction<TRequest, TResponse extends ServiceResponse> = (
-	data: TRequest,
+export type ServiceFunction<TInput, TResponse> = (
+	input: TInput,
 ) => Promise<TResponse>;

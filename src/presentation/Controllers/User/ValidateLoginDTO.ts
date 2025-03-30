@@ -3,10 +3,14 @@ import type { IUserLoginDTO } from "../../../core/User/DTOs/UserDTOLogin";
 import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 
 export const validateChoosenFieldOnObject = <T>(
-	user: T,
+	object: T,
 	field: keyof T,
 ): ServiceResponse | null => {
-	if (!user[field]) {
+	console.log({ field: object[field] });
+	if (
+		!object[field] ||
+		(typeof object[field] === "string" && object[field].trim().length === 0)
+	) {
 		return {
 			status: "INVALID_INPUT",
 			error: `${field.toString().toUpperCase()} field is required`,
@@ -16,25 +20,22 @@ export const validateChoosenFieldOnObject = <T>(
 	return null;
 };
 
-export const validateLoginDTO = (
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) => {
-	const userLoginData = req.body as IUserLoginDTO;
-	const errors = [
-		validateChoosenFieldOnObject(userLoginData, "email"),
-		validateChoosenFieldOnObject(userLoginData, "password"),
-	].filter(Boolean);
+export const validateRequestObject =
+	(fieldsToValidate: string[]) =>
+	(req: Request, res: Response, next: NextFunction) => {
+		const requestData = req.body;
+		const errors = fieldsToValidate
+			.map((field) => validateChoosenFieldOnObject(requestData, field))
+			.filter(Boolean);
 
-	if (errors.length > 0) {
-		res.status(400).json({
-			status: "INVALID_INPUT",
-			message: "Validation errors",
-			errors,
-		});
-		return;
-	}
+		if (errors.length > 0) {
+			res.status(400).json({
+				status: "INVALID_INPUT",
+				message: "Validation errors",
+				errors,
+			});
+			return;
+		}
 
-	next();
-};
+		next();
+	};

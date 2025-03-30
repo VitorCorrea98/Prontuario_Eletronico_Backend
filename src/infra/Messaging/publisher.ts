@@ -1,4 +1,4 @@
-import { connectRabbitMQ } from "./rabbitmq";
+import { connectRabbitMQ } from "../../config/rabbitmq";
 
 export const publishMessage = async (queue: string, message: object) => {
 	const { channel } = await connectRabbitMQ();

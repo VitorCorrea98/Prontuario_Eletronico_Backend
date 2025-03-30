@@ -1,19 +1,39 @@
-import { type Request, type Response, Router } from "express";
+import { Router } from "express";
 
+import type {
+	LoginInput,
+	LoginRequest,
+} from "../../core/User/UseCases/User_Login";
 import { PrismaUserRepository } from "../../infra/Repositories/PrismaUserRepository";
 import { userService } from "../../infra/Services/UserService";
+import type { ServiceResponse } from "../../shared/HTTP/ServiceReponse";
 import { genericController } from "../Controllers/GenericController";
-import { validateLoginDTO } from "../Controllers/User/ValidateLoginDTO";
+import { validateRequestObject } from "../Controllers/User/ValidateLoginDTO";
 import { validateUserExists } from "../Controllers/User/validateUserExists";
 
 export const userRouter = Router();
 const UserService = userService(PrismaUserRepository);
 
-userRouter.post("/", genericController(UserService.create));
+userRouter.post(
+	"/",
+	validateRequestObject(["name", "email", "role", "password"]),
+	genericController(UserService.create),
+);
 
 userRouter.post(
 	"/login",
-	validateLoginDTO,
+	validateRequestObject(["email", "password"]),
 	validateUserExists(PrismaUserRepository),
-	genericController(UserService.login),
+	genericController<LoginInput, ServiceResponse, LoginRequest>(
+		async (input) => await UserService.login(input),
+		(req) => {
+			if (!req.user) {
+				throw new Error("User is undefined");
+			}
+			return {
+				userFound: req.user,
+				userCredentials: req.body,
+			};
+		},
+	),
 );

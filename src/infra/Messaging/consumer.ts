@@ -1,5 +1,5 @@
 import type { ConsumeMessage } from "amqplib";
-import { connectRabbitMQ } from "./rabbitmq";
+import { connectRabbitMQ } from "../../config/rabbitmq";
 
 const processMessage = (msg: string) => {
 	return msg.toUpperCase();
