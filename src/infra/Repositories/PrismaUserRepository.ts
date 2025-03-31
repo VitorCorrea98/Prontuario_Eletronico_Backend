@@ -12,4 +12,10 @@ export const PrismaUserRepository: IUserRepository<User> = {
 	async findByEmail(email) {
 		return await prisma.user.findUnique({ where: { email } });
 	},
+
+	async delete(userToDelete) {
+		return await prisma.user.delete({
+			where: { email: userToDelete.email, id: Number(userToDelete.id) },
+		});
+	},
 };

@@ -1,11 +1,18 @@
-import express, { type Request, type Response } from "express";
+import express, {
+	type NextFunction,
+	type Request,
+	type Response,
+} from "express";
 import { router } from "./presentation/Routes";
+import { ipFilter, verifyAPIKey } from "./shared/Security/application";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(verifyAPIKey);
+app.use(ipFilter);
+
 app.use("/api", router);
 
-app.listen(3000, () => {
-	console.log(`Servidor rodando na porta ${3000} corretamente`);
-});
+app.listen(3000);
