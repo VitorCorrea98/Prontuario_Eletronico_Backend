@@ -1,34 +1,40 @@
-import { type Request, Router } from "express";
-import type { IUserDeleteDTO } from "../../core/User/DTOs/UserDTODelete";
+import type { IUserDeleteDTO, IUserLoginDTO } from "@core/User/DTOs";
+import type { User } from "@core/User/Entities/User_Entity";
+import type { CreateUserInput } from "@core/User/UseCases/User_CreateUser";
 import type {
 	UserDeleteInput,
 	UserDeleteRequest,
-} from "../../core/User/UseCases/User_Delete";
-import type {
-	LoginInput,
-	LoginRequest,
-} from "../../core/User/UseCases/User_Login";
+} from "@core/User/UseCases/User_Delete";
+import type { LoginInput, LoginRequest } from "@core/User/UseCases/User_Login";
+import { Router } from "express";
 import { PrismaUserRepository } from "../../infra/Repositories/PrismaUserRepository";
 import { userService } from "../../infra/Services/UserService";
 import type { ServiceResponse } from "../../shared/HTTP/ServiceReponse";
 import { verifyJWT } from "../../shared/Security/authToken";
 import { genericController } from "../Controllers/GenericController";
-import { validateRequestObject } from "../Controllers/User/ValidateLoginDTO";
-import { validateTokenIsADMIN } from "../Controllers/User/validateTokenIsADMIN";
-import { validateUserExists } from "../Controllers/User/validateUserExists";
+import {
+	validateRequestObject,
+	validateTokenRole,
+	validateUserExists,
+} from "../Controllers/User";
 
 export const userRouter = Router();
 const UserService = userService(PrismaUserRepository);
 
+// const authLimiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 5 // Limit each IP to 5 requests per window
+// });
+
 userRouter.post(
 	"/",
-	validateRequestObject(["name", "email", "role", "password"]),
+	validateRequestObject<CreateUserInput>(["name", "email", "role", "password"]),
 	genericController(UserService.create),
 );
 
 userRouter.post(
 	"/login",
-	validateRequestObject(["email", "password"]),
+	validateRequestObject<IUserLoginDTO>(["email", "password"]),
 	validateUserExists(PrismaUserRepository),
 	genericController<LoginInput, ServiceResponse, LoginRequest>(
 		UserService.login,
@@ -46,8 +52,9 @@ userRouter.post(
 
 userRouter.delete(
 	"/:id/delete",
+	validateRequestObject<Pick<User, "email">>(["email"]),
 	verifyJWT,
-	validateTokenIsADMIN,
+	validateTokenRole("ADMIN"),
 	genericController<UserDeleteInput, ServiceResponse, UserDeleteRequest>(
 		UserService.delete,
 		(req) => {

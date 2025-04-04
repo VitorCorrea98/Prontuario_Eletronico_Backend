@@ -1,6 +1,5 @@
-// genericController.ts
 import type { NextFunction, Request, Response } from "express";
-import type { IUserLoginDTO } from "../../../core/User/DTOs/UserDTOLogin";
+import type { IUserLoginDTO } from "../../../core/User/DTOs";
 import type { User } from "../../../core/User/Entities/User_Entity";
 import type { IUserReadRepository } from "../../../core/User/Repositories/User_Repository";
 

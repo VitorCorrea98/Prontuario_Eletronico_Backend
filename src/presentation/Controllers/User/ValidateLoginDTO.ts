@@ -1,5 +1,4 @@
 import type { NextFunction, Request, Response } from "express";
-import type { IUserLoginDTO } from "../../../core/User/DTOs/UserDTOLogin";
 import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 
 export const validateChoosenFieldOnObject = <T>(
@@ -20,9 +19,10 @@ export const validateChoosenFieldOnObject = <T>(
 };
 
 export const validateRequestObject =
-	(fieldsToValidate: string[]) =>
+	<T>(fieldsToValidate: (keyof T)[]) =>
 	(req: Request, res: Response, next: NextFunction) => {
 		const requestData = req.body;
+
 		const errors = fieldsToValidate
 			.map((field) => validateChoosenFieldOnObject(requestData, field))
 			.filter(Boolean);
@@ -33,6 +33,17 @@ export const validateRequestObject =
 				message: "Validation errors",
 				errors,
 			});
+			return;
+		}
+
+		// Validate extra fields
+		const requestKeys = Object.keys(requestData) as (keyof T)[];
+		const extraKeys = requestKeys.filter(
+			(key) => !fieldsToValidate.includes(key),
+		);
+
+		if (extraKeys.length > 0) {
+			res.status(404).json({ message: "Unexpecte keys on request" });
 			return;
 		}
 

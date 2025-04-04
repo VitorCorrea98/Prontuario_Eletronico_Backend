@@ -1,5 +1,4 @@
-import type { AuthTokenPayload } from "../../../shared/Security/authToken";
-import type { IUserDeleteDTO } from "../DTOs/UserDTODelete";
+import type { IUserDeleteDTO } from "../DTOs";
 
 export type IUserCreateRepository<T> = {
 	create(userLoginForm: Omit<T, "id" | "createdAt" | "updatedAt">): Promise<T>;

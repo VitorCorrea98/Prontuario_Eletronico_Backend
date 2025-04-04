@@ -3,7 +3,7 @@ import { publishMessage } from "../../../infra/Messaging/publisher";
 import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 import { generateAuthToken } from "../../../shared/Security/authToken";
 import { comparePassword } from "../../../shared/Security/hash";
-import type { IUserLoginDTO } from "../DTOs/UserDTOLogin";
+import type { IUserLoginDTO } from "../DTOs";
 import type { User } from "../Entities/User_Entity";
 
 export type LoginInput = {
