@@ -1,4 +1,3 @@
-import type { Request } from "express";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import type {
 	ServiceErrorResponse,
