@@ -1,5 +1,4 @@
 import type { Request } from "express";
-import * as jwt from "jsonwebtoken";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 import type { AuthTokenPayload } from "../../../shared/Security/authToken";
