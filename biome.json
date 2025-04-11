@@ -24,6 +24,10 @@
 				"noUnusedImports": {
 					"level": "error",
 					"fix": "safe"
+				},
+				"noUnusedVariables": {
+					"level": "error",
+					"fix": "safe"
 				}
 			}
 		}

@@ -50,7 +50,7 @@ export const userLogin = async (
 			status: "OK",
 			message: "User login went well",
 		};
-	} catch (error) {
+	} catch (_error) {
 		return {
 			status: "BAD",
 			error: "Login error",

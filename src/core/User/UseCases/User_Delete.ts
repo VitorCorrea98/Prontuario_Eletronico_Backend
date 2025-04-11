@@ -15,6 +15,8 @@ export type UserDeleteRequest = Request & {
 	decoded?: AuthTokenPayload;
 };
 
+const _teste = "fefe";
+
 export const userDelete =
 	(userRepository: IUserDeleteRepository<User>) =>
 	async (input: UserDeleteInput): Promise<ServiceResponse> => {
@@ -32,7 +34,7 @@ export const userDelete =
 				status: "OK",
 				message: "User deleted",
 			};
-		} catch (error) {
+		} catch (_error) {
 			return {
 				status: "BAD",
 				error: "Error when trying to delete user",

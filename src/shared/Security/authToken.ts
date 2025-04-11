@@ -30,7 +30,7 @@ export const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
 		(req as Request & { decoded: AuthTokenPayload }).decoded =
 			decoded as AuthTokenPayload;
 		next();
-	} catch (error) {
+	} catch (_error) {
 		res.status(403).json({ message: "Forbidden: Invalid token" });
 		return;
 	}

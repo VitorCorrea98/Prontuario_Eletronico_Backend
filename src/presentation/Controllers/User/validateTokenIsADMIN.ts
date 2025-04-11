@@ -2,7 +2,8 @@ import type { NextFunction, Response } from "express";
 import type { User } from "../../../core/User/Entities/User_Entity";
 import type { UserDeleteRequest } from "../../../core/User/UseCases/User_Delete";
 
-const JWT_SECRET = process.env.JWT_SECRET || "secret_JWT";
+const _teste = "estando";
+const _JWT_SECRET = process.env.JWT_SECRET || "secret_JWT";
 
 export const validateTokenRole =
 	(roleToValidate: Pick<User, "role">["role"]) =>
