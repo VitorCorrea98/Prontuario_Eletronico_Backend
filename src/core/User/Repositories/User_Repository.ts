@@ -1,7 +1,8 @@
+import type { GetDefaultEntity } from "types/entity";
 import type { IUserDeleteDTO } from "../DTOs";
 
 export type IUserCreateRepository<T> = {
-	create(userLoginForm: Omit<T, "id" | "createdAt" | "updatedAt">): Promise<T>;
+	create(userLoginForm: GetDefaultEntity<T>): Promise<T>;
 };
 
 export type IUserReadRepository<T> = {

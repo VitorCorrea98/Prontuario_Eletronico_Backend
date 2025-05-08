@@ -2,6 +2,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output = "client"
 }
 
 datasource db {
@@ -28,7 +29,7 @@ model Patient {
   id        Int      @id @default(autoincrement())
   name      String
   birthDate DateTime
-  gender    String
+  gender    Gender
   address   String
   phone     String
   createdAt DateTime @default(now())
@@ -72,4 +73,9 @@ model Consultation {
 enum UserRole {
   ADMIN
   NURSE
+}
+
+enum Gender {
+  MALE
+  FEMALE
 }
