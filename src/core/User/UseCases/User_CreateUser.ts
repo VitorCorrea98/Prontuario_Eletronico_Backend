@@ -10,17 +10,21 @@ import type { IUserCreateRepository } from "../Repositories/User_Repository";
 
 export type CreateUserInput = Omit<User, "id" | "createdAt" | "updatedAt">;
 
+type TCreateUserInput = {
+	body: CreateUserInput;
+};
+
 export const createUser =
 	(userRepository: IUserCreateRepository<User>) =>
-	async (request: CreateUserInput): Promise<ServiceResponse> => {
+	async (request: TCreateUserInput): Promise<ServiceResponse> => {
 		try {
-			const user = request;
+			const { body } = request;
 			// 🔐 Criptografa a senha
-			const hashedPassword = await hashPassword(user.password);
+			const hashedPassword = await hashPassword(body.password);
 
 			// 📝 Cria o usuário no banco
 			const createdUser = await userRepository.create({
-				...user,
+				...body,
 				password: hashedPassword,
 			});
 
@@ -40,7 +44,7 @@ export const createUser =
 			return response;
 		} catch (error) {
 			const response: ServiceErrorResponse = {
-				status: "BAD",
+				status: "BAD_REQUEST",
 				message: "Erro ao criar usuário.",
 				error: (error as Error).message,
 			};

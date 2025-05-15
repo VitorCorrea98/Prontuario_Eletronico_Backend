@@ -1,5 +1,3 @@
-import type { UserRole } from "../../../../prisma/client";
-
 export type User = Readonly<{
 	id: number;
 	name: string;
@@ -9,3 +7,5 @@ export type User = Readonly<{
 	createdAt: Date;
 	updatedAt: Date;
 }>;
+
+export type UserRole = "ADMIN" | "NURSE";

@@ -31,7 +31,6 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysql_data:/var/lib/mysql
 
 

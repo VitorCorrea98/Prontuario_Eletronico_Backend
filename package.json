@@ -1,10 +1,13 @@
 {
   "name": "prontuario_eletronico",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/app.ts",
   "type": "commonjs",
   "scripts": {
-    "start:dev": "nodemon src/app.ts",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate deploy",
+    "prestart": "npm run prisma:generate && npm run prisma:migrate",
+    "start": "nodemon src/app.ts",
     "check": "npx biome check",
     "check:fix": "npx biome check --write",
     "prepare": "husky",
@@ -31,7 +34,8 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.0",
-    "prisma": "^6.5.0"
+    "prisma": "^6.5.0",
+    "ts-express-generic": "^0.0.10"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

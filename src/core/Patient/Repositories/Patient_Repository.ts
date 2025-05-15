@@ -1,3 +1,5 @@
+import type { GetDefaultEntity } from "types/entity";
+
 export type TPatientCreateRepository<T> = {
-	create: () => Promise<T>;
+	create: (patient: GetDefaultEntity<T>) => Promise<T>;
 };

@@ -10,7 +10,7 @@ export const validateChoosenFieldOnObject = <T>(
 		(typeof object[field] === "string" && object[field].trim().length === 0)
 	) {
 		return {
-			status: "INVALID_INPUT",
+			status: "UNPROCESSABLE_ENTITY",
 			error: `${field.toString().toUpperCase()} field is required`,
 			message: `${field.toString().toUpperCase()} can't be empty`,
 		};
@@ -43,7 +43,7 @@ export const validateRequestObject =
 		);
 
 		if (extraKeys.length > 0) {
-			res.status(404).json({ message: "Unexpecte keys on request" });
+			res.status(404).json({ message: "Unexpected keys on request" });
 			return;
 		}
 

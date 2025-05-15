@@ -1,49 +1,49 @@
-import type { Request } from "express";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 import { generateAuthToken } from "../../../shared/Security/authToken";
 import { comparePassword } from "../../../shared/Security/hash";
-import type { IUserLoginDTO } from "../DTOs";
 import type { User } from "../Entities/User_Entity";
 
 export type LoginInput = {
-	userCredentials: IUserLoginDTO;
-	userFound: User;
-};
-
-export type LoginRequest = Request & {
-	user?: User;
+	body: {
+		email: string;
+		password: string;
+	};
+	locals: {
+		userFound: User;
+	};
 };
 
 export const userLogin = async (
 	input: LoginInput,
 ): Promise<ServiceResponse> => {
 	try {
-		const { userFound, userCredentials: userLoginData } = input;
+		console.log({ input });
+		const { body, locals } = input;
 
 		const loginPasswordMatchUser = await comparePassword(
-			userLoginData.password,
-			userFound.password,
+			body.password,
+			locals.userFound.password,
 		);
 
 		if (!loginPasswordMatchUser) {
 			return {
-				status: "BAD",
+				status: "BAD_REQUEST",
 				message: "Invalid email/password",
 				error: "Invalid email/password",
 			};
 		}
 
 		const token = generateAuthToken({
-			email: userFound.email,
-			role: userFound.role,
+			email: locals.userFound.email,
+			role: locals.userFound.role,
 		});
 
 		await publishMessage("auth.token_generated", {
-			userId: userFound.id,
+			userId: locals.userFound.id,
 			token: token,
-			email: userFound.email,
-			name: userFound.name,
+			email: locals.userFound.email,
+			name: locals.userFound.name,
 		});
 
 		return {
@@ -52,7 +52,7 @@ export const userLogin = async (
 		};
 	} catch (_error) {
 		return {
-			status: "BAD",
+			status: "BAD_REQUEST",
 			error: "Login error",
 			message: "Error when trying to login",
 		};

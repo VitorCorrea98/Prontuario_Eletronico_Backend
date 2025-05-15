@@ -2,32 +2,38 @@ import type { Request } from "express";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 import type { AuthTokenPayload } from "../../../shared/Security/authToken";
-import type { IUserDeleteDTO } from "../DTOs";
 import type { User } from "../Entities/User_Entity";
 import type { IUserDeleteRepository } from "../Repositories/User_Repository";
 
 export type UserDeleteInput = {
-	userToDelete: IUserDeleteDTO;
-	decoded: AuthTokenPayload;
+	body: {
+		email: string;
+	};
+	params: {
+		id: string;
+	};
+	locals: {
+		decoded: User;
+	};
 };
 
 export type UserDeleteRequest = Request & {
 	decoded?: AuthTokenPayload;
 };
 
-const _teste = "fefe";
-
 export const userDelete =
 	(userRepository: IUserDeleteRepository<User>) =>
 	async (input: UserDeleteInput): Promise<ServiceResponse> => {
 		try {
-			const { userToDelete, decoded } = input;
+			const { body, params } = input;
 
-			await userRepository.delete(userToDelete);
-			console.log({ userToDelete, decoded });
+			await userRepository.delete({
+				email: body.email,
+				id: params.id as unknown as number,
+			});
 
 			await publishMessage("user.deleted", {
-				message: `User id: ${userToDelete.id} and email: ${userToDelete.email} was deleted successfuly`,
+				message: `User id: ${params.id} and email: ${body.email} was deleted successfuly`,
 			});
 
 			return {
@@ -36,7 +42,7 @@ export const userDelete =
 			};
 		} catch (_error) {
 			return {
-				status: "BAD",
+				status: "BAD_REQUEST",
 				error: "Error when trying to delete user",
 				message: "Error when trying to delete user",
 			};
