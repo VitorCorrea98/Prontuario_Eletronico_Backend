@@ -1,6 +1,6 @@
 import type { Request } from "express";
+import type { ServiceResponse } from "ts-express-generic";
 import { publishMessage } from "../../../infra/Messaging/publisher";
-import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 import type { AuthTokenPayload } from "../../../shared/Security/authToken";
 import type { User } from "../Entities/User_Entity";
 import type { IUserDeleteRepository } from "../Repositories/User_Repository";

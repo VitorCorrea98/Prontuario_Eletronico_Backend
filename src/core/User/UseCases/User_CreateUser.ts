@@ -1,9 +1,9 @@
-import { publishMessage } from "../../../infra/Messaging/publisher";
 import type {
 	ServiceErrorResponse,
 	ServiceResponse,
 	ServiceSuccessResponse,
-} from "../../../shared/HTTP/ServiceReponse";
+} from "ts-express-generic";
+import { publishMessage } from "../../../infra/Messaging/publisher";
 import { hashPassword } from "../../../shared/Security/hash";
 import type { User } from "../Entities/User_Entity";
 import type { IUserCreateRepository } from "../Repositories/User_Repository";

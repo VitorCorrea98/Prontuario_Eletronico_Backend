@@ -2,7 +2,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../node_modules/prisma/client"
+  output   = "../node_modules/prisma/client"
 }
 
 datasource db {
@@ -22,11 +22,14 @@ model User {
   // Relations
   medicalRecords MedicalRecord[]
   Consultation   Consultation[]
+  patients       Patient[]
+
   @@map("users")
 }
 
 model Patient {
   id        Int      @id @default(autoincrement())
+  userId    Int
   name      String
   birthDate DateTime
   gender    Gender
@@ -38,6 +41,8 @@ model Patient {
   // Relations
   medicalRecords MedicalRecord[]
   Consultation   Consultation[]
+  User           User           @relation(fields: [userId], references: [id])
+
   @@map("patients")
 }
 
@@ -52,6 +57,7 @@ model MedicalRecord {
   patientId Int
   user      User    @relation(fields: [userId], references: [id])
   patient   Patient @relation(fields: [patientId], references: [id])
+
   @@map("medical_records")
 }
 
@@ -67,6 +73,7 @@ model Consultation {
   patientId Int
   user      User    @relation(fields: [userId], references: [id])
   patient   Patient @relation(fields: [patientId], references: [id])
+
   @@map("consultations")
 }
 

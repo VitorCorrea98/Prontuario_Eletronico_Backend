@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
+import type { ServiceResponse } from "ts-express-generic";
 
 export const validateChoosenFieldOnObject = <T>(
 	object: T,

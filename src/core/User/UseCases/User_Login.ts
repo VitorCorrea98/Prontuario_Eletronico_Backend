@@ -1,5 +1,5 @@
+import type { ServiceResponse } from "ts-express-generic";
 import { publishMessage } from "../../../infra/Messaging/publisher";
-import type { ServiceResponse } from "../../../shared/HTTP/ServiceReponse";
 import { generateAuthToken } from "../../../shared/Security/authToken";
 import { comparePassword } from "../../../shared/Security/hash";
 import type { User } from "../Entities/User_Entity";
@@ -18,7 +18,6 @@ export const userLogin = async (
 	input: LoginInput,
 ): Promise<ServiceResponse> => {
 	try {
-		console.log({ input });
 		const { body, locals } = input;
 
 		const loginPasswordMatchUser = await comparePassword(
@@ -37,14 +36,10 @@ export const userLogin = async (
 		const token = generateAuthToken({
 			email: locals.userFound.email,
 			role: locals.userFound.role,
+			id: locals.userFound.id,
 		});
 
-		await publishMessage("auth.token_generated", {
-			userId: locals.userFound.id,
-			token: token,
-			email: locals.userFound.email,
-			name: locals.userFound.name,
-		});
+		await publishMessage("auth.token_generated", { token });
 
 		return {
 			status: "OK",

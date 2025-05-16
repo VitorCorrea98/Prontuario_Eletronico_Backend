@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import { PrismaClient } from "../node_modules/prisma/client";
 import { hashPassword } from "../src/shared/Security/hash";
 
 const prisma = new PrismaClient();
