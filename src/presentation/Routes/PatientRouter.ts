@@ -16,7 +16,7 @@ patientRouter.get(
 	genericController({
 		service: patientService.getAll,
 		requestKeys: [],
-		middlewares: [],
+		middlewares: [verifyJWT],
 	}),
 );
 

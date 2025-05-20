@@ -6,7 +6,9 @@ const prisma = getPrismaClient();
 
 export const PrismaPatientRepository: TPatientRepository<TPatient> = {
 	getAll() {
-		return prisma.patient.findMany();
+		return prisma.patient.findMany({
+			include: { medicalRecords: true, consultation: true },
+		});
 	},
 
 	create(patient) {

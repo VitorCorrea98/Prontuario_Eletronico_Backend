@@ -1,4 +1,4 @@
-import type { GetDefaultEntity } from "types/entity";
+import type { GetDefaultEntity } from "../../../types/entity";
 import type { IUserDeleteDTO } from "../DTOs";
 
 export type IUserCreateRepository<T> = {
