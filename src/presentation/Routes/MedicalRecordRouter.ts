@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { genericController } from "ts-express-generic";
-import { MedicalRecordService } from "../../infra/Services/MedicalRecordService";
-import { PrismaMedicalRecordRepository } from "../../infra/Repositories/PrismaMedicalRecordRepository";
-import { validateRequestObject } from "../Controllers/User";
 import type { TMedicalRecordCreateDTO } from "../../core/DTOs/MedicalRecord/MedicalRecordCreate";
+import { PrismaMedicalRecordRepository } from "../../infra/Repositories/PrismaMedicalRecordRepository";
+import { MedicalRecordService } from "../../infra/Services/MedicalRecordService";
+import { validateRequestObject } from "../Controllers/User";
 
 export const medicalRecordRouter = Router();
 

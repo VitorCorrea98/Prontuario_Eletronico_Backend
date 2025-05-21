@@ -1,8 +1,8 @@
 import type { ServiceResponse } from "ts-express-generic";
-import type { TMedicalRecord } from "../../Entities/MedicalRecord_Entity";
-import type { TMedicalRecordCreateRepository } from "../../Repositories/MedicalRecord_Repository";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import type { TMedicalRecordCreateDTO } from "../../DTOs/MedicalRecord/MedicalRecordCreate";
+import type { TMedicalRecord } from "../../Entities/MedicalRecord_Entity";
+import type { TMedicalRecordCreateRepository } from "../../Repositories/MedicalRecord_Repository";
 
 type createInput = {
 	body: TMedicalRecordCreateDTO;

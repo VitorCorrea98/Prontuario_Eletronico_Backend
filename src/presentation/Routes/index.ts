@@ -1,7 +1,7 @@
 import { Router } from "express";
+import { medicalRecordRouter } from "./MedicalRecordRouter";
 import { patientRouter } from "./PatientRouter";
 import { userRouter } from "./UserRouter";
-import { medicalRecordRouter } from "./MedicalRecordRouter";
 
 export const router = Router();
 
