@@ -1,7 +1,7 @@
 import type { ServiceResponse } from "ts-express-generic";
 import { publishMessage } from "../../../infra/Messaging/publisher";
-import type { TPatient } from "../Entities/Patient_Entity";
-import type { TPatientReadRepository } from "../Repositories/Patient_Repository";
+import type { TPatient } from "../../Entities/Patient_Entity";
+import type { TPatientReadRepository } from "../../Repositories/Patient_Repository";
 
 export const patientGetAll =
 	(patientRepository: TPatientReadRepository<TPatient>) =>

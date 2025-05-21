@@ -44,10 +44,10 @@ model Patient {
 model MedicalRecord {
   id          Int      @id @default(autoincrement())
   description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
   userId      Int
   patientId   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   patient     Patient  @relation(fields: [patientId], references: [id])
   user        User     @relation(fields: [userId], references: [id])
 

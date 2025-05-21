@@ -1,5 +1,5 @@
-import type { GetDefaultEntity } from "../../../types/entity";
-import type { IUserDeleteDTO } from "../DTOs";
+import type { GetDefaultEntity } from "../../types/entity";
+import type { IUserDeleteDTO } from "../User/DTOs";
 
 export type IUserCreateRepository<T> = {
 	create(userLoginForm: GetDefaultEntity<T>): Promise<T>;

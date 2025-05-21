@@ -1,6 +1,6 @@
 import { getPrismaClient } from "../../config/prisma";
-import type { User } from "../../core/User/Entities/User_Entity";
-import type { IUserRepository } from "../../core/User/Repositories/User_Repository";
+import type { User } from "../../core/Entities/User_Entity";
+import type { IUserRepository } from "../../core/Repositories/User_Repository";
 
 const prisma = getPrismaClient();
 

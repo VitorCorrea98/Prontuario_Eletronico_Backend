@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import type { IUserLoginDTO } from "../../../core/User/DTOs";
-import type { User } from "../../../core/User/Entities/User_Entity";
-import type { IUserReadRepository } from "../../../core/User/Repositories/User_Repository";
+import type { IUserLoginDTO } from "../../../core/DTOs/User/";
+import type { User } from "../../../core/Entities/User_Entity";
+import type { IUserReadRepository } from "../../../core/Repositories/User_Repository";
 
 export const validateUserExists =
 	(userRepository: IUserReadRepository<User>) =>

@@ -5,8 +5,8 @@ import type {
 } from "ts-express-generic";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import { hashPassword } from "../../../shared/Security/hash";
-import type { User } from "../Entities/User_Entity";
-import type { IUserCreateRepository } from "../Repositories/User_Repository";
+import type { User } from "../../Entities/User_Entity";
+import type { IUserCreateRepository } from "../../Repositories/User_Repository";
 
 export type CreateUserInput = Omit<User, "id" | "createdAt" | "updatedAt">;
 

@@ -2,7 +2,7 @@ import type { ServiceResponse } from "ts-express-generic";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import { generateAuthToken } from "../../../shared/Security/authToken";
 import { comparePassword } from "../../../shared/Security/hash";
-import type { User } from "../Entities/User_Entity";
+import type { User } from "../../Entities/User_Entity";
 
 export type LoginInput = {
 	body: {

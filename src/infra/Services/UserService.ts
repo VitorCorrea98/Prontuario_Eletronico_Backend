@@ -1,6 +1,6 @@
-import type { User } from "../../core/User/Entities/User_Entity";
-import type { IUserRepository } from "../../core/User/Repositories/User_Repository";
-import { createUser, userDelete, userLogin } from "../../core/User/UseCases";
+import type { User } from "../../core/Entities/User_Entity";
+import type { IUserRepository } from "../../core/Repositories/User_Repository";
+import { createUser, userDelete, userLogin } from "../../core/UseCases/User";
 
 export const userService = (ORMRepository: IUserRepository<User>) => ({
 	create: createUser(ORMRepository),

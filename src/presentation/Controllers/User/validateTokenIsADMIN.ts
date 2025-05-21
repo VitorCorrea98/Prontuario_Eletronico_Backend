@@ -1,6 +1,6 @@
 import type { NextFunction, Response } from "express";
-import type { User } from "../../../core/User/Entities/User_Entity";
-import type { UserDeleteRequest } from "../../../core/User/UseCases/User_Delete";
+import type { User } from "../../../core/Entities/User_Entity";
+import type { UserDeleteRequest } from "../../../core/UseCases/User/User_Delete";
 
 const _teste = "estando";
 const _JWT_SECRET = process.env.JWT_SECRET || "secret_JWT";

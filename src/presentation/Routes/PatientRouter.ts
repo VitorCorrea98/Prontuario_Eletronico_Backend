@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { genericController } from "ts-express-generic";
-import type { TPatient } from "../../core/Patient/Entities/Patient_Entity";
+import type { TPatient } from "../../core/Entities/Patient_Entity";
 import { PrismaPatientRepository } from "../../infra/Repositories/PrimsaPatientRepository";
 import { PatientService } from "../../infra/Services/PatientService";
 import { verifyJWT } from "../../shared/Security/authToken";

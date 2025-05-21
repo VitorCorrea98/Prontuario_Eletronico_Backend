@@ -2,8 +2,8 @@ import type { ServiceResponse } from "ts-express-generic";
 import { publishMessage } from "../../../infra/Messaging/publisher";
 import type { AuthTokenPayload } from "../../../shared/Security/authToken";
 import type { GetDefaultEntity } from "../../../types/entity";
-import type { TPatient } from "../Entities/Patient_Entity";
-import type { TPatientCreateRepository } from "../Repositories/Patient_Repository";
+import type { TPatient } from "../../Entities/Patient_Entity";
+import type { TPatientCreateRepository } from "../../Repositories/Patient_Repository";
 
 export type TPatientInput = {
 	body: GetDefaultEntity<TPatient>;

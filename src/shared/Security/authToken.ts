@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import type { User } from "../../core/User/Entities/User_Entity";
+import type { User } from "../../core/Entities/User_Entity";
 
 const SECRET_KEY = process.env.JWT_SECRET || "default_secret_key";
 const TOKEN_EXPIRATION = "1h";

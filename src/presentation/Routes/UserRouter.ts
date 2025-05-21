@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { genericController } from "ts-express-generic";
-import type { IUserLoginDTO } from "../../core/User/DTOs";
-import type { User } from "../../core/User/Entities/User_Entity";
-import type { CreateUserInput } from "../../core/User/UseCases/User_CreateUser";
-import type {} from "../../core/User/UseCases/User_Delete";
-import type {} from "../../core/User/UseCases/User_Login";
+import type { IUserLoginDTO } from "../../core/DTOs/User";
+import type { User } from "../../core/Entities/User_Entity";
+import type { CreateUserInput } from "../../core/UseCases/User/User_CreateUser";
+import type {} from "../../core/UseCases/User/User_Delete";
+import type {} from "../../core/UseCases/User/User_Login";
 import { PrismaUserRepository } from "../../infra/Repositories/PrismaUserRepository";
 import { userService } from "../../infra/Services/UserService";
 import { verifyJWT } from "../../shared/Security/authToken";
