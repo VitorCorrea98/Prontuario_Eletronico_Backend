@@ -18,7 +18,7 @@ export const verifyAPIKey = (
 	const apiKey = req.headers["x-api-key"];
 
 	if (apiKey !== "eusoquerofazerumrequestporfavor") {
-		res.status(403).json({ message: "Unauthorized" });
+		res.status(403).json({ message: "Unauthorized!" });
 		return;
 	}
 
