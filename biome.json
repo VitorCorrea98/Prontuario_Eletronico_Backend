@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["package*", "tsconfig.json", "*d.ts", "client"]
+		"ignore": ["package*", "tsconfig.json", "*d.ts", "client", ".vscode"]
 	},
 	"formatter": {
 		"enabled": true,
