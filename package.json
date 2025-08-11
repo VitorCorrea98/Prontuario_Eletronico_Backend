@@ -26,28 +26,29 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^6.5.0",
-    "amqplib": "^0.10.5",
-    "bcrypt": "^5.1.1",
+    "@prisma/client": "^6.9.0",
+    "amqplib": "^0.10.8",
+    "bcrypt": "^6.0.0",
     "crypto": "^1.0.1",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.0",
-    "prisma": "^6.5.0",
+    "mysql2": "^3.14.1",
+    "prisma": "^6.9.0",
     "ts-express-generic": "^0.0.10"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/amqplib": "^0.10.7",
     "@types/bcrypt": "^5.0.2",
-    "@types/express": "^5.0.1",
+    "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^22.13.13",
+    "@types/node": "^24.0.0",
     "biome": "^0.3.3",
     "husky": "^9.1.7",
-    "nodemon": "^3.1.9",
+    "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
-  }
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
 }

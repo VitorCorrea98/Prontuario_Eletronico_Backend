@@ -6,18 +6,21 @@ WORKDIR /app
 
 RUN apt-get update -y && apt-get install -y openssl
 
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json* ./
+# Instala pnpm globalmente
+RUN npm install -g pnpm
+
+# Copia arquivos do projeto
+COPY package.json pnpm-lock.yaml ./
 
 # Copy the rest of the application files
 COPY . .
 
 # Install dependencies
-RUN npm install
+RUN pnpm install
 
 # Expose application port
 EXPOSE 3000
 
 # Set entrypoint script
-ENTRYPOINT [ "npm", "run" ]
+ENTRYPOINT [ "pnpm", "run" ]
 CMD [ "start" ]
