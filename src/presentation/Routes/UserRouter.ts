@@ -9,9 +9,9 @@ import { PrismaUserRepository } from "../../infra/Repositories/PrismaUserReposit
 import { userService } from "../../infra/Services/UserService";
 import { verifyJWT } from "../../shared/Security/authToken";
 import {
-	validateRequestObject,
-	validateTokenRole,
-	validateUserExists,
+  validateRequestObject,
+  validateTokenRole,
+  validateUserExists,
 } from "../Controllers/User";
 
 export const userRouter = Router();
@@ -23,43 +23,43 @@ const UserService = userService(PrismaUserRepository);
 // });
 
 userRouter.post(
-	"/login",
-	genericController({
-		service: UserService.login,
-		requestKeys: ["body", "locals"],
-		middlewares: [
-			validateRequestObject<IUserLoginDTO>(["email", "password"]),
-			validateUserExists(PrismaUserRepository),
-		],
-	}),
+  "/login",
+  genericController({
+    service: UserService.login,
+    requestKeys: ["body", "locals"],
+    middlewares: [
+      validateRequestObject<IUserLoginDTO>(["email", "password"]),
+      validateUserExists(PrismaUserRepository),
+    ],
+  }),
 );
 
 userRouter.post(
-	"/create",
-	genericController({
-		service: UserService.create,
-		requestKeys: ["body"],
-		middlewares: [
-			validateTokenRole("ADMIN"),
-			validateRequestObject<CreateUserInput>([
-				"email",
-				"name",
-				"password",
-				"role",
-			]),
-		],
-	}),
+  "/create",
+  genericController({
+    service: UserService.create,
+    requestKeys: ["body"],
+    middlewares: [
+      validateTokenRole("ADMIN"),
+      validateRequestObject<CreateUserInput>([
+        "email",
+        "name",
+        "password",
+        "role",
+      ]),
+    ],
+  }),
 );
 
 userRouter.delete(
-	"/:id/delete",
-	genericController({
-		service: UserService.delete,
-		requestKeys: ["body", "params"],
-		middlewares: [
-			validateRequestObject<Pick<User, "email">>(["email"]),
-			verifyJWT,
-			validateTokenRole("ADMIN"),
-		],
-	}),
+  "/:id/delete",
+  genericController({
+    service: UserService.delete,
+    requestKeys: ["body", "params"],
+    middlewares: [
+      validateRequestObject<Pick<User, "email">>(["email"]),
+      verifyJWT,
+      validateTokenRole("ADMIN"),
+    ],
+  }),
 );

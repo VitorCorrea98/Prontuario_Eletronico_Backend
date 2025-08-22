@@ -12,25 +12,25 @@ const medicalRecordORM = PrismaMedicalRecordRepository;
 const medicalRecordService = MedicalRecordService(medicalRecordORM);
 
 medicalRecordRouter.get(
-	"/",
-	genericController({
-		service: medicalRecordService.getAll,
-		requestKeys: ["body"],
-		middlewares: [],
-	}),
+  "/",
+  genericController({
+    service: medicalRecordService.getAll,
+    requestKeys: ["body"],
+    middlewares: [],
+  }),
 );
 
 medicalRecordRouter.post(
-	"/",
-	genericController({
-		service: medicalRecordService.create,
-		requestKeys: ["body"],
-		middlewares: [
-			validateRequestObject<TMedicalRecordCreateDTO>([
-				"description",
-				"userId",
-				"patientId",
-			]),
-		],
-	}),
+  "/",
+  genericController({
+    service: medicalRecordService.create,
+    requestKeys: ["body"],
+    middlewares: [
+      validateRequestObject<TMedicalRecordCreateDTO>([
+        "description",
+        "userId",
+        "patientId",
+      ]),
+    ],
+  }),
 );

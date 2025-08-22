@@ -12,28 +12,28 @@ export const patientRouter = Router();
 const patientService = PatientService(PrismaPatientRepository);
 
 patientRouter.get(
-	"/",
-	genericController({
-		service: patientService.getAll,
-		requestKeys: [],
-		middlewares: [verifyJWT],
-	}),
+  "/",
+  genericController({
+    service: patientService.getAll,
+    requestKeys: [],
+    middlewares: [verifyJWT],
+  }),
 );
 
 patientRouter.post(
-	"/create",
-	genericController({
-		service: patientService.create,
-		requestKeys: ["body", "locals"],
-		middlewares: [
-			validateRequestObject<GetDefaultEntity<TPatient>>([
-				"name",
-				"address",
-				"birthDate",
-				"gender",
-				"phone",
-			]),
-			verifyJWT,
-		],
-	}),
+  "/create",
+  genericController({
+    service: patientService.create,
+    requestKeys: ["body", "locals"],
+    middlewares: [
+      validateRequestObject<GetDefaultEntity<TPatient>>([
+        "name",
+        "address",
+        "birthDate",
+        "gender",
+        "phone",
+      ]),
+      verifyJWT,
+    ],
+  }),
 );

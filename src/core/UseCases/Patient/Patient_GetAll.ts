@@ -4,14 +4,14 @@ import type { TPatient } from "../../Entities/Patient_Entity";
 import type { TPatientReadRepository } from "../../Repositories/Patient_Repository";
 
 export const patientGetAll =
-	(patientRepository: TPatientReadRepository<TPatient>) =>
-	async (): Promise<ServiceResponse> => {
-		const patients = await patientRepository.getAll();
+  (patientRepository: TPatientReadRepository<TPatient>) =>
+  async (): Promise<ServiceResponse> => {
+    const patients = await patientRepository.getAll();
 
-		await publishMessage("patients.getAll", { patients });
+    await publishMessage("patients.getAll", { patients });
 
-		return {
-			status: "OK",
-			message: "All patients returned",
-		};
-	};
+    return {
+      status: "OK",
+      message: "All patients returned",
+    };
+  };

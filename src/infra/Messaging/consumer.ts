@@ -2,21 +2,21 @@ import type { ConsumeMessage } from "amqplib";
 import { connectRabbitMQ } from "../../config/rabbitmq";
 
 const processMessage = (msg: string) => {
-	return msg.toUpperCase();
+  return msg.toUpperCase();
 };
 
 export const consumeMessage = async (queue: string) => {
-	const { channel } = await connectRabbitMQ();
+  const { channel } = await connectRabbitMQ();
 
-	await channel.assertQueue(queue, { durable: true });
+  await channel.assertQueue(queue, { durable: true });
 
-	channel.consume(queue, (msg: ConsumeMessage | null) => {
-		if (msg !== null) {
-			const processedMessage = processMessage(msg.content.toString());
-			console.log("Processed message:", processedMessage);
+  channel.consume(queue, (msg: ConsumeMessage | null) => {
+    if (msg !== null) {
+      const processedMessage = processMessage(msg.content.toString());
+      console.log("Processed message:", processedMessage);
 
-			// Acknowledge the message after processing
-			channel.ack(msg);
-		}
-	});
+      // Acknowledge the message after processing
+      channel.ack(msg);
+    }
+  });
 };

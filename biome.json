@@ -6,7 +6,8 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": [".next", "node_modules"]
+    "ignore": [".next", "node_modules"],
+    "include": ["src/**/*.ts"]
   },
   "formatter": {
     "enabled": true,
@@ -35,10 +36,11 @@
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single",
-      "jsxQuoteStyle": "single",
-      "semicolons": "asNeeded",
-      "arrowParentheses": "asNeeded"
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
+      "semicolons": "always",
+      "arrowParentheses": "asNeeded",
+      "indentWidth": 2
     }
   },
   "json": {

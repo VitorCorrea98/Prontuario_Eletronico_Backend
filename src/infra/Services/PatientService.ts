@@ -3,8 +3,8 @@ import type { TPatientRepository } from "../../core/Repositories/Patient_Reposit
 import { patientCreate, patientGetAll } from "../../core/UseCases/Patient";
 
 export const PatientService = (
-	ORMRepository: TPatientRepository<TPatient>,
+  ORMRepository: TPatientRepository<TPatient>,
 ) => ({
-	getAll: patientGetAll(ORMRepository),
-	create: patientCreate(ORMRepository),
+  getAll: patientGetAll(ORMRepository),
+  create: patientCreate(ORMRepository),
 });

@@ -4,8 +4,8 @@ import { medicalRecordCreate } from "../../core/UseCases/MedicalRecord/MedicalRe
 import { medicalRecordGetAll } from "../../core/UseCases/MedicalRecord/MedicalRecord_GetAll";
 
 export const MedicalRecordService = (
-	ORMRepository: TMedicalRecordRepository<TMedicalRecord>,
+  ORMRepository: TMedicalRecordRepository<TMedicalRecord>,
 ) => ({
-	getAll: medicalRecordGetAll(ORMRepository),
-	create: medicalRecordCreate(ORMRepository),
+  getAll: medicalRecordGetAll(ORMRepository),
+  create: medicalRecordCreate(ORMRepository),
 });

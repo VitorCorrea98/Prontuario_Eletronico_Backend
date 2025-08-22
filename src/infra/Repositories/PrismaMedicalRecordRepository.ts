@@ -5,18 +5,18 @@ import type { TMedicalRecordRepository } from "../../core/Repositories/MedicalRe
 const prismaClient = getPrismaClient();
 
 export const PrismaMedicalRecordRepository: TMedicalRecordRepository<TMedicalRecord> =
-	{
-		async getAll() {
-			return await prismaClient.medicalRecord.findMany({
-				include: {
-					user: { select: { name: true, role: true } },
-					patient: {
-						select: { name: true, birthDate: true },
-					},
-				},
-			});
-		},
-		async create(medicalRecord) {
-			return await prismaClient.medicalRecord.create({ data: medicalRecord });
-		},
-	};
+  {
+    async getAll() {
+      return await prismaClient.medicalRecord.findMany({
+        include: {
+          user: { select: { name: true, role: true } },
+          patient: {
+            select: { name: true, birthDate: true },
+          },
+        },
+      });
+    },
+    async create(medicalRecord) {
+      return await prismaClient.medicalRecord.create({ data: medicalRecord });
+    },
+  };

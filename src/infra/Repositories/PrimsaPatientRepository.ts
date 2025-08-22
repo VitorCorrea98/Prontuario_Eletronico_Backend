@@ -5,13 +5,13 @@ import type { TPatientRepository } from "../../core/Repositories/Patient_Reposit
 const prisma = getPrismaClient();
 
 export const PrismaPatientRepository: TPatientRepository<TPatient> = {
-	getAll() {
-		return prisma.patient.findMany({
-			include: { medicalRecords: true, consultation: true },
-		});
-	},
+  getAll() {
+    return prisma.patient.findMany({
+      include: { medicalRecords: true, consultation: true },
+    });
+  },
 
-	create(patient) {
-		return prisma.patient.create({ data: patient });
-	},
+  create(patient) {
+    return prisma.patient.create({ data: patient });
+  },
 };
